@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Francis Escara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:      #F7F4EF;
+      --beige:      #EDE4D8;
+      --sage-light: #C9D8C5;
+      --sage:       #9DB59A;
+      --sage-deep:  #6E9470;
+      --text:       #3D3530;
+      --text-muted: #8A7E78;
+      --border:     rgba(61,53,48,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--white);
+      color: var(--text);
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(247, 244, 239, 0.80);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 1.5rem 4rem;
+      background: var(--white);
+      position: relative;
+    }
+
+    /* the card */
+    .hero-card {
+      width: 100%;
+      max-width: 780px;
+      min-height: 72vh;
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 3rem 3rem 3rem;
+      background:
+        radial-gradient(ellipse at 80% 10%,  rgba(255,252,248,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 80%,  rgba(201,216,197,0.60) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 70%,  rgba(157,181,154,0.45) 0%, transparent 55%),
+        linear-gradient(145deg, #c6d9c2 0%, #a8c4a4 35%, #8fb08b 65%, #b8ccb5 100%);
+      box-shadow:
+        0 4px 6px rgba(100,130,100,0.06),
+        0 12px 40px rgba(100,130,100,0.14),
+        0 40px 80px rgba(80,110,80,0.10);
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 160px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,252,246,0.55) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(20px,-25px) scale(1.06); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-card::after { animation: none; }
+      .fade-up { opacity: 1 !important; transform: none !important; }
+    }
+
+    .hero-card-top {
+      position: absolute;
+      top: 2.4rem; left: 3rem; right: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(61,53,48,0.55);
+    }
+
+    .hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(61,53,48,0.45);
+      background: rgba(255,255,255,0.28);
+      border: 1px solid rgba(255,255,255,0.45);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-name-block {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: #2a2420;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: #3d5e3a;
+    }
+
+    .hero-sub {
+      font-size: 0.82rem;
+      color: rgba(42,36,32,0.60);
+      margin-top: 0.9rem;
+      line-height: 1.85;
+      max-width: 300px;
+    }
+
+    .hero-scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2.2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--sage-deep), transparent);
+      animation: scrollPulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.35; transform: scaleY(0.7); }
+      50%       { opacity: 1;    transform: scaleY(1); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 7rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--sage-deep); }
+
+    /* ── ABOUT ── */
+    .about-body {
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    .about-body p + p { margin-top: 1.4rem; }
+
+    .about-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .about-card {
+      background: var(--beige);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .about-card-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .about-card-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .skill-tag {
+      background: transparent;
+      border: 1px solid var(--sage);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .skill-tag:hover {
+      background: var(--sage);
+      color: var(--white);
+    }
+
+    .skills-note {
+      margin-top: 2.5rem;
+      padding: 1.5rem 2rem;
+      background: var(--beige);
+      border-radius: 14px;
+      border-left: 3px solid var(--sage);
+    }
+
+    .skills-note p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ── PROJECT ── */
+    .project-card {
+      background: var(--beige);
+      border-radius: 18px;
+      padding: 2.5rem;
+      margin-top: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(157,181,154,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .project-type {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      margin-bottom: 0.8rem;
+    }
+
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-tag {
+      font-size: 0.72rem;
+      background: rgba(157,181,154,0.2);
+      color: var(--sage-deep);
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── CONTACT ── */
+    .contact-intro {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 1.8rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .contact-link:hover {
+      background: var(--beige);
+      border-color: var(--sage);
+    }
+
+    .contact-link-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .contact-link-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      margin-top: 0.2rem;
+    }
+
+    .contact-arrow {
+      font-size: 1.1rem;
+      color: var(--sage);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    footer span { color: var(--sage-deep); }
+
+    /* ── FADE-UP ANIMATION ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .about-cards { grid-template-columns: 1fr; }
+      section { padding: 5rem 1.5rem; }
+      .hero { padding: 5rem 1rem 3rem; }
+      .hero-card { padding: 2rem; min-height: 65vh; }
+      .hero-card-top { left: 2rem; right: 2rem; top: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">frvncs</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-card fade-up">
+      <div class="hero-card-top">
+        <span class="hero-eyebrow">IT Student · RTU · Antipolo City</span>
+        <span class="hero-tag">2026</span>
+      </div>
+      <div class="hero-name-block">
+        <h1 class="hero-name">
+          Francis Justine<br><em>Escara</em>
+        </h1>
+        <p class="hero-sub">
+          Learning something new every day.<br>
+        </p>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label fade-up">About</p>
+    <h2 class="section-title fade-up">A little about <em>me</em></h2>
+    <div class="about-body fade-up">
+      <p>
+        Hi, I'm Francis Justine Escara, a 3rd-year BS Information Technology student at
+        Rizal Technological University. I spend most of my time learning, building, and
+        breaking things just to understand how they work.
+      </p>
+      <p>
+        When I'm not deep in code, I find myself making random music —
+        not on any schedule, just whenever the mood hits. This site is a
+        small window into who I am: quiet, curious, always becoming.
+      </p>
+    </div>
+    <div class="about-cards fade-up">
+      <div class="about-card">
+        <p class="about-card-label">Currently</p>
+        <p class="about-card-value">3rd Year, BS Information Technology</p>
+      </div>
+      <div class="about-card">
+        <p class="about-card-label">University</p>
+        <p class="about-card-value">Rizal Technological University</p>
+      </div>
+      <div class="about-card">
+        <p class="about-card-label">Interests</p>
+        <p class="about-card-value">Tech, music, creative projects</p>
+      </div>
+      <div class="about-card">
+        <p class="about-card-label">Currently exploring</p>
+        <p class="about-card-value">AI, web development</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label fade-up">Skills</p>
+    <h2 class="section-title fade-up">What I <em>work with</em></h2>
+    <div class="skills-grid fade-up">
+      <span class="skill-tag">C++</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">Java</span>
+      <span class="skill-tag">HTML</span>
+      <span class="skill-tag">CSS</span>
+    </div>
+    <div class="skills-note fade-up">
+      <p>"I'm always picking up something new — the list keeps growing."</p>
+    </div>
+
+    <br><br>
+    <p class="section-label fade-up">Featured Project</p>
+    <h2 class="section-title fade-up">Things I've <em>built</em></h2>
+    <div class="project-card fade-up">
+      <p class="project-type">Group Project · Computer Vision</p>
+      <h3 class="project-title">AI Facial Recognition for School Security</h3>
+      <p class="project-desc">
+        A collaborative system designed to enhance campus security through
+        AI-powered facial recognition. Built to identify and authenticate
+        individuals in real time as part of a school-level security solution.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">Artificial Intelligence</span>
+        <span class="project-tag">Computer Vision</span>
+        <span class="project-tag">Group Project</span>
+        <span class="project-tag">Security Systems</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label fade-up">Contact</p>
+    <h2 class="section-title fade-up">Let's <em>connect</em></h2>
+    <p class="contact-intro fade-up">
+      Whether you want to collaborate, talk tech, or just say hi —
+      I'm always open to a good conversation.
+    </p>
+    <div class="contact-links fade-up">
+      <a href="https://github.com/francisescara" target="_blank" rel="noopener" class="contact-link">
+        <div>
+          <p class="contact-link-label">GitHub</p>
+          <p class="contact-link-value">francisescara</p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a href="https://github.com/frvncs" target="_blank" rel="noopener" class="contact-link">
+        <div>
+          <p class="contact-link-label">GitHub (alt)</p>
+          <p class="contact-link-value">frvncs</p>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Crafted with intention by <span>Francis Escara</span> · 2025</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
